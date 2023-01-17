@@ -1,5 +1,31 @@
+import menus.MainMenu
+
 fun main() {
-    // ваш код начнется здесь
-    // вы не должны ограничиваться только классом Main и можете создавать свои классы по необходимости
-    println("Привет")
+
+    val setOfPreviousMenus: MutableSet<Menu?> = mutableSetOf(null)
+    val mainMenu = MainMenu("Список архивов") {}
+    var currentMenu: Menu = mainMenu
+
+    while (true) {
+
+        currentMenu.takeUserInput()
+
+        if (currentMenu.menuToPass != null) {
+            setOfPreviousMenus.add(currentMenu)
+        }
+
+        currentMenu = currentMenu.menuToPass ?: currentMenu
+
+        if (currentMenu.isExitTime) {
+            currentMenu.isExitTime = false
+            currentMenu = setOfPreviousMenus.last() ?: break
+            setOfPreviousMenus.remove(setOfPreviousMenus.last())
+        }
+    }
 }
+
+
+
+
+
+
