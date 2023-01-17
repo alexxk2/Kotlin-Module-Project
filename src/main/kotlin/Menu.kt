@@ -14,8 +14,8 @@ abstract class Menu(val title: String, val lambdaAction: () -> Unit) {
     private fun printMenu() {
         println()
         printTitle()
-        listOfItems.forEach {
-            println("${listOfItems.indexOf(it)}. ${it.title}")
+        listOfItems.forEachIndexed { index, menu ->
+            println("${index}. ${menu.title}")
         }
         return
     }
